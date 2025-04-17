@@ -22,5 +22,11 @@ NIS2337_2024-2025-2
 └── Tang's notes/            # 唐老师的笔记
 ```
 
+## Better Preview
+- [Markdown Preview Enhanced](https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/) is recommended for better preview.
+
+## Author
+- [YYYJ](mailto:ma_yuezhao@sjtu.edu.cn)
+
 ## Thanks
 - [Ms Tang](mailto:junhuatang@sjtu.edu.cn) in SJTU for her great lectures and notes.
