@@ -942,6 +942,8 @@
 - **定义错误概率** \(P_e = \Pr\{X \neq \hat{X}\}\)。
     - 若 \(P_e = 0\)，即 \(X = \hat{X}\) 以概率 1 成立，\(H(X|\hat{X}) = 0\)。
     - 这里讨论 \(P_e \neq 0\) 时，\(P_e\) 和 \(H(X|\hat{X})\) 之间的关系。
+- **例题**：
+    ![例题](image/image-117.png)
 
 #### 费诺不等式
 - 设 \(X\) 和 \(\hat{X}\) 取值空间同为 \(\mathcal{X}\) 的随机变量，则有 \[H(X|\hat{X}) \leq H(P_e)+ P_e \log(|\mathcal{X}|-1)\] 其中 \(H(P_e)=H(P_e, 1 - P_e)\) 为二元熵函数，\(|\mathcal{X}|\) 为 \(X\) 和 \(\hat{X}\) 的取值数量。
@@ -975,35 +977,39 @@
     在费诺不等式中令 \(\hat{X} = Y\)，即可得到上式。 
 
 #### 其他不等式
-- 设 \(X\) 和 \(X'\) 为两个独立同分布的随机变量，有相同的熵 \(H(X)\)，那么 \(X = X'\) 的概率为 \(\Pr(X = X')=\sum_{x} p^2(x)\)，则有如下不等式：
+- 设 \(X\) 和 \(X'\) 为两个相互独立的随机变量，且 \(X \sim p(x)\)，\(X' \sim r(x)\)，那么 \(X = X'\) 的概率为 \(\Pr(X = X')=\sum_{x} p(x)r(x)\)，有如下不等式：
 
-1. 如果 \(X\) 和 \(X'\) 独立同分布，具有熵 \(H(X)\)，则 \(\Pr(X = X') \geq 2^{-H(X)}\)，当且仅当 \(X\) 服从均匀分布，等号成立。
-    - **证明**：
-        假定 \(X \sim p(x)\)，由Jensen不等式，令 \(f(y) = 2^y\) 为下凸函数。
-        则 \(f(E(Y)) \leq E(f(Y))\) ，令 \(y=\log p(x)\)，则有：
-        \[
-        \begin{align*}
-        2^{\sum_{x} p(x)\log p(x)} &\leq \sum_{x} p(x)2^{\log p(x)}\\
-        &=\sum_{x} p(x)p(x)\\
-        &=\sum_{x} p^2(x)
-        \end{align*}
-        \] 因为 \(H(X)=-\sum_{x} p(x)\log p(x)\)，所以 \(2^{-H(X)} \leq \Pr(X = X')\) 。
+    1. 如果 \(X\) 和 \(X'\) 独立同分布，具有相同的熵 \(H(X)\)，则 \(X = X'\) 的概率为 \(\Pr(X = X')=\sum_{x} p^2(x)\)，且有 \[\Pr(X = X') \geq 2^{-H(X)}\] 当且仅当 \(X\) 服从均匀分布，等号成立。
+        - **证明**：
+            假定 \(X \sim p(x)\)，由Jensen不等式，令 \(f(y) = 2^y\) 为下凸函数。
+            则 \(f(E(Y)) \leq E(f(Y))\) ，令 \(y=\log p(x)\)，则有：
+            \[
+            \begin{align*}
+            2^{-H(X)}&=2^{\sum_{x} p(x)\log p(x)}\\
+            &\leq \sum_{x} p(x)2^{\log p(x)}\\
+            &=\sum_{x} p(x)p(x)\\
+            &=\sum_{x} p^2(x)\\
+            &=\Pr(X = X')
+            \end{align*}
+            \] 所以 \(2^{-H(X)} \leq \Pr(X = X')\) ，当且仅当 \(X\) 服从均匀分布时，Jensen不等式取等，上式等号成立。
 
-2. 设 \(X\) 和 \(X'\) 相互独立，且 \(X \sim p(x)\)，\(X' \sim r(x)\)，\(x,x' \in \mathcal{X}\)，则
-\[
-\Pr(X = X') \geq 2^{-H(p)-D(p||r)}\\
-Pr(X = X') \geq 2^{-H(r)-D(r||p)}
-\]
-    - **证明**：
+    2. 设 \(X\) 和 \(X'\) 相互独立，且 \(X \sim p(x)\)，\(X' \sim r(x)\)，\(x,x' \in \mathcal{X}\)，则
         \[
-        \begin{align*}
-        2^{-H(p)-D(p||r)}&=2^{\sum p(x)\log p(x)+\sum p(x)\log \frac{r(x)}{p(x)}}\\
-        &=2^{\sum p(x)\log r(x)}\\
-        &\leq \sum p(x)2^{\log r(x)}\\
-        &=\sum p(x)r(x)\\
-        &=\Pr(X = X')
-        \end{align*}
+        \Pr(X = X') \geq 2^{-H(p)-D(p||r)}\\
+        \Pr(X = X') \geq 2^{-H(r)-D(r||p)}
         \]
+        - **证明**：
+            \[
+            \begin{align*}
+            2^{-H(p)-D(p||r)}&=2^{\sum p(x)\log p(x)+\sum p(x)\log \frac{r(x)}{p(x)}}\\
+            &=2^{\sum p(x)\log r(x)}\\
+            &\leq \sum p(x)2^{\log r(x)}\\
+            &=\sum p(x)r(x)\\
+            &=\Pr(X = X')
+            \end{align*}
+            \]
+
+- **例题**：![例题](image/image-118.png)
 
 ## 2.4 离散序列信源的熵
 ### 离散无记忆信源的序列熵
@@ -1038,6 +1044,8 @@ Pr(X = X') \geq 2^{-H(r)-D(r||p)}
     **用 \(H_L(\vec{X})\) 表示长度为 \(L\) 的序列平均每个符号的熵**，则
     \[H_L(\vec{X})=\frac{1}{L}H(\vec{X}) = H(X)\]
 
+- 例题：![例题](image/image-119.png)
+
 ### 离散有记忆信源的序列熵
 - 长度为 \(L\) 的符号序列 \(\vec{X}=(X_1,X_2,\cdots,X_L)\) 
     \[
@@ -1048,6 +1056,7 @@ Pr(X = X') \geq 2^{-H(r)-D(r||p)}
     \]
 - 记作 \[H(\vec{X}) = H(X^L)=\sum_{l = 1}^{L}H(X_l|X^{l - 1})\]
 - 平均每个符号的熵 \[H_L(\vec{X})=\frac{1}{L}H(X^L)\]
+- 例题：![例题](image/image-120.png)
 
 ### 离散平稳信源序列熵
 #### 定义
@@ -1092,7 +1101,7 @@ Pr(X = X') \geq 2^{-H(r)-D(r||p)}
         H_L(\vec{X})&\leq H_{L - 1}(\vec{X})
         \end{align*}
         \] 
-4. 当 \(L \to \infty\) 时，定义\(H_{\infty}(\vec{X})\)为极限熵，有
+4. 当 \(L \to \infty\) 时，定义\(H_{\infty}(\vec{X})\)为**极限熵**，有
     \[
     H_{\infty}(\vec{X}) \triangleq \lim_{L \to \infty} H_{L}(\vec{X})=\lim_{L \to \infty} H(X_L|X_1,X_2,\cdots,X_{L - 1})
     \] 
@@ -1116,6 +1125,7 @@ Pr(X = X') \geq 2^{-H(r)-D(r||p)}
         \[
         H_0(X) \geq H_1(X) \geq H_2(\vec{X}) \geq H_3(\vec{X}) \cdots \geq H_{\infty}(\vec{X})
         \]
+
         **只有极限熵最真实地反映信源的实际情况。**
 
 ### 马尔可夫信源的极限熵
@@ -1165,7 +1175,7 @@ Pr(X = X') \geq 2^{-H(r)-D(r||p)}
     \end{align*}
     \] 
 
-- 例题
+- 例题：
     ![例题](image/image-10.png)
 
 ## 2.5 连续信源的熵和互信息
@@ -1237,16 +1247,17 @@ Pr(X = X') \geq 2^{-H(r)-D(r||p)}
     - **对于定义域为有限的随机变量 \(X\)，当它是均匀分布时，具有最大熵。**
     - \(X\) 幅度取值限制在 \([a, b]\)，有 \(\int_{a}^{b}P_X(x)dx = 1\) 。
     - 当 \(P_X(x)=\begin{cases}\frac{1}{b - a},&a\leq x\leq b\\0,&其他\end{cases}\)  时，信息熵最大，
-        \[H_c(X)=-\int_{a}^{b}\frac{1}{b - a}\log\frac{1}{b - a}=\log(b - a)\] 
+        \[H_c(X)=-\int_{a}^{b}\frac{1}{b - a}\log\frac{1}{b - a}dx=\log(b - a)\] 
 3. **限平均功率最大熵定理**
     - **对于相关矩阵一定的随机变量 \(X\)，当它是正态分布时具有最大熵。**
     - 概率密度函数 \(P_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x - \mu)^2}{2\sigma^2}}\)
-    - 其中 \(\mu\) 为均值，\(\sigma^2\) 为方差，\(\sigma^2=\int (x-\mu)^2P_X(x)dx\) 。
+        - 其中 \(\mu\) 为均值，\(\sigma^2\) 为方差，\(\sigma^2=\int (x-\mu)^2P_X(x)dx\) 。
     - 信息熵 \(H_c(X)\) 的计算过程如下：
     \[
     \begin{align*}
     H_c(X)&=-\int_{-\infty}^{+\infty}P_X(x)\log P_X(x)dx\\
-    &=E[-\log P_X(x)]=E\left[-\log\frac{1}{\sqrt{2\pi\sigma^2}}-\log e^{-\frac{(x - m)^2}{2\sigma^2}}\right]\\
+    &=E[-\log P_X(x)]\\
+    &=E\left[-\log\frac{1}{\sqrt{2\pi\sigma^2}}-\log e^{-\frac{(x - m)^2}{2\sigma^2}}\right]\\
     &=E\left[\frac{1}{2}\log(2\pi\sigma^2)+\frac{(x - m)^2}{2\sigma^2}\log e\right]\\
     &=\frac{1}{2}\log(2\pi\sigma^2)+\frac{\log e}{2}\\
     &=\frac{1}{2}\log(2\pi e\sigma^2)
@@ -1257,11 +1268,11 @@ Pr(X = X') \geq 2^{-H(r)-D(r||p)}
         设 \(\varphi(x)\sim N(0,\sigma^2)\)，\(g(x)\) 满足 \(\int x^2g(x)dx=\sigma^2\) ，因为 \(D(g(x)\| \varphi(x))\geq0\)，即：
         \[
         \begin{align*}
-        &D(g(x)\| \varphi(x))\geq0\\
-        &\Rightarrow \int_{-\infty}^{+\infty}g(x)\log\frac{g(x)}{\varphi(x)}dx\geq0\\
-        &\Rightarrow \int_{-\infty}^{+\infty}g(x)\log g(x)dx-\int_{-\infty}^{+\infty}g(x)\log\varphi(x)dx\geq0\\
-        &\Rightarrow -H_c(g(x))\geq\int_{-\infty}^{+\infty}g(x)\log\varphi(x)dx\\
-        &\Rightarrow H_c(g(x))\leq-\int_{-\infty}^{+\infty}g(x)\log\varphi(x)dx
+        D(g(x)\| \varphi(x))&=\int_{-\infty}^{+\infty}g(x)\log\frac{g(x)}{\varphi(x)}dx\\
+        &=\int_{-\infty}^{+\infty}g(x)\log g(x)dx-\int_{-\infty}^{+\infty}g(x)\log\varphi(x)dx\\
+        &=-H_c(g(x))-\int_{-\infty}^{+\infty}g(x)\log\varphi(x)dx\\
+        &\geq0\\
+        \therefore \quad H_c(g(x))&\leq-\int_{-\infty}^{+\infty}g(x)\log\varphi(x)dx
         \end{align*}
         \]
 
@@ -1276,7 +1287,7 @@ Pr(X = X') \geq 2^{-H(r)-D(r||p)}
         \end{align*}
         \]
 
-        所以 \(H_c(g(x))\leq\frac{1}{2}\log(2\pi e\sigma^2)=H_c(\varphi(x))\) 。 
+        所以 \(H_c(g(x))\leq\frac{1}{2}\log(2\pi e\sigma^2)=H_c(\varphi(x))\)，当且仅当 \(g(x) = \varphi(x)\)，为正态分布时等号成立。 
 
 ## 2.6 信源的冗余度
 - 冗余度也称多余度或剩余度，表示给定信源在实际发出消息时所包含的多余信息。
@@ -1284,8 +1295,10 @@ Pr(X = X') \geq 2^{-H(r)-D(r||p)}
 - **例子**：
     英文字母26个，加上空格共27个符号，则**单符号最大熵**为
     \[H_0(X)=\log_2{27} \approx 4.76 \text{ bit/符号}\]
+
     对英文书中各符号出现的概率加以统计，可得一组数值。若字母间无记忆，有
     \[H_1(X)= - \sum_{i = 1}^{n}p_i\log p_i = 4.03 \text{ bit/符号}\]
+
     若考虑2阶、3阶直至高阶平稳信源，有
     \[
     \begin{align*}

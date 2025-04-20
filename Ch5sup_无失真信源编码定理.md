@@ -198,20 +198,21 @@
         m^{-l_i} = p(a_i),\quad l_i = \frac{-\log p(a_i)}{\log m}
         \]
     2. **证明 \(\overline{k} < \frac{H(X)}{\log m} + 1\)**
-        由\(l_i\) 满足唯一可译码存在的条件得：
+        符号 \(a_i\) 的码长 \(l_i\) 需要是整数，因此取
+        \[\frac{-\log p(a_i)}{\log m} \leq l_i < \frac{-\log p(a_i)}{\log m} + 1\]
+
+        由
         \[
         \begin{align*}
-        &\sum_{i = 1}^{n} m^{-l_i} \leq 1 = \sum_{i = 1}^{n} p(a_i)\\
-        &\Rightarrow  m^{-l_i} \leq p(a_i)\\
-        &\Rightarrow -\log p(a_i) \leq -\log m^{-l_i} = l_i\log m\\
-        &\Rightarrow \frac{-\log p(a_i)}{\log m} \leq l_i\\
+        &\frac{-\log p(a_i)}{\log m} \leq l_i\\
+        &\Rightarrow -\log m^{l_i} \leq \log p(a_i)\\
+        &\Rightarrow m^{-l_i} \leq p(a_i)\\
+        &\Rightarrow \sum_{i = 1}^{n} m^{-l_i} \leq \sum_{i = 1}^{n} p(a_i)=1
         \end{align*}
         \]
 
-        又符号 \(a_i\) 的码长 \(l_i\) 需要是整数，因此取
-        \[\frac{-\log p(a_i)}{\log m} \leq l_i < \frac{-\log p(a_i)}{\log m} + 1\]
-
-        则有
+        表明 \(l_i\) 满足唯一可译码存在的条件。
+        又由
         \[
         \begin{align*}
         l_i &< \frac{-\log p(a_i)}{\log m} + 1\\
