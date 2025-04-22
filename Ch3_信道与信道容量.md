@@ -349,10 +349,18 @@ p(Y = 1|X = 1) = p(Y = 0|X = 0) = 1 - p
     \]
     - **信道无记忆时**：
         \[I(\vec{X};\vec{Y})\leq\sum_{l = 1}^{L}I(X_l;Y_l)\]
-        - 由于变量之间可能存在的依赖关系等因素，整体的条件不确定性 \(H(\vec{Y}|\vec{X})\) 不会小于各个分量条件不确定性\(H(Y_l|X_l)\)之和，即 \(H(\vec{Y}|\vec{X}) \geq \sum_{l = 1}^{L}H(Y_l|X_l)\)，而\(H(\vec{Y}) = \sum_{l = 1}^{L}H(Y_l)\)， 所以\(I(\vec{X};\vec{Y})\leq\sum_{l = 1}^{L}I(X_l;Y_l)\)。
+        - 证明：
+            由定义有：\(I(\vec{X};\vec{Y})=H(\vec{Y})-H(\vec{Y}|\vec{X})\)和\(I(X_l;Y_l)=H(Y_l)-H(Y_l|X_l)\)，利用\(H(X)\)的链式法则有：
+            ①\(H(\vec{Y})=H(Y_1,Y_2,\cdots,Y_L)=H(Y_1)+H(Y_2|Y_1)+\cdots+H(Y_L|Y_1,Y_2,\cdots,Y_{L - 1})\leq \sum_{l = 1}^{L}H(Y_l)\)
+            ②\(H(\vec{Y}|\vec{X})=H(Y_1|\vec{X})+H(Y_2|Y_1,\vec{X})+\cdots+H(Y_L|Y_1,Y_2,\cdots,Y_{L - 1},\vec{X})=\sum_{l = 1}^{L}H(Y_l|X_l)\)（无记忆信道下，给定 \(X_l\) 后，其他时刻的输入输出对确定 \(Y_l\) 的不确定性没有额外帮助）
+            所以有：\(I(\vec{X};\vec{Y})=H(\vec{Y})-H(\vec{Y}|\vec{X})\leq \sum_{l = 1}^{L}H(Y_l)-\sum_{l = 1}^{L}H(Y_l|X_l)=\sum_{l = 1}^{L}I(X_l;Y_l)\)。
     - **输入矢量\(\vec{X}\)中各分量相互独立时**：
         \[I(\vec{X};\vec{Y})\geq\sum_{l = 1}^{L}I(X_l;Y_l)\]
-        - 根据互信息的链式法则有：\(I(\vec{X};\vec{Y}) = I(X_{1},\cdots,X_{L};\vec{Y}) = I(X_{1};\vec{Y}) + I(X_{2};\vec{Y}|X_{1}) + \cdots + I(X_{L};\vec{Y}|X_{1},\cdots,X_{L - 1})\)，其中\(I(X_l;\vec{Y}|X_1,\cdots,X_{l - 1}) = H(X_l|X_1,\cdots,X_{l - 1}) - H(X_l|\vec{Y},X_1,\cdots,X_{l - 1})\) ，其中因为 \(X_l\) 与 \(X_1,\cdots,X_{l - 1}\) 独立，\(H(X_l|X_1,\cdots,X_{l - 1}) = H(X_l)\) ，而增加 \(\vec{Y}\) 相关条件后，条件越多不确定性可能越小，\(H(X_l|\vec{Y},X_1,\cdots,X_{l - 1})\leq H(X_l|Y_l)\) ，所以 \(I(X_l;\vec{Y}|X_1,\cdots,X_{l - 1}) \geq I(X_l;Y_l)\)，因此有：\(I(\vec{X};\vec{Y}) \geq \sum_{l = 1}^{L}I(X_l;Y_l)\)。
+        - 证明：
+            由定义有：\(I(\vec{X};\vec{Y})=H(\vec{X}) - H(\vec{X}|\vec{Y})\)和\(I(X_l;Y_l)=H(X_l)-H(X_l|Y_l)\)，利用\(H(X)\)的链式法则有：
+            ①\(H(\vec{X})=H(X_1,X_2,\cdots,X_L)=H(X_1)+H(X_2|X_1)+\cdots+H(X_L|X_1,X_2,\cdots,X_{L - 1})=\sum_{l = 1}^{L}H(X_l)\)（由于各分量相互独立）
+            ②\(H(\vec{X}|\vec{Y})=H(X_1|\vec{Y})+H(X_2|X_1,\vec{Y})+\cdots+H(X_L|X_1,X_2,\cdots,X_{L - 1},\vec{Y})=\sum_{l = 1}^{L}H(X_l|\vec{Y})\leq \sum_{l = 1}^{L}H(X_l|Y_l)\)（已知更多信息 \(\vec{Y}\) 时，\(X_l\) 的不确定性不会比仅知道 \(Y_l\) 时更大）
+            所以有：\(I(\vec{X};\vec{Y})=H(\vec{X})-H(\vec{X}|\vec{Y})\geq \sum_{l = 1}^{L}H(X_l)-\sum_{l = 1}^{L}H(X_l|\vec{Y})=\sum_{l = 1}^{L}I(X_l;Y_l)\)。
     - **当输入矢量\(\vec{X}\)独立且信道无记忆时**，上述两个性质统一取等号，此时**信道容量**：
         \[
         \begin{align*}
@@ -475,7 +483,7 @@ p(Y = 1|X = 1) = p(Y = 0|X = 0) = 1 - p
     - **怎样合理分配各单元时刻的信号平均功率，才能使信道传输率最大？**
         用拉格朗日乘数法，作辅助函数
         \[
-        f(P_1, P_2, \cdots, P_L) = \sum_{l = 1}^{L} \frac{1}{2} \log(1 + \frac{P_l}{\sigma_l^2}) + \lambda \sum_{l = 1}^{L} P_l
+        f(P_1, P_2, \cdots, P_L) = \sum_{l = 1}^{L} \frac{1}{2} \log(1 + \frac{P_l}{\sigma_l^2}) + \lambda (\sum_{l = 1}^{L} P_l - P)
         \]
 
         对第一项求最大，第二项为约束条件
