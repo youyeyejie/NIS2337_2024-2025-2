@@ -947,7 +947,7 @@
 
 #### 费诺不等式
 - 设 \(X\) 和 \(\hat{X}\) 取值空间同为 \(\mathcal{X}\) 的随机变量，则有 \[H(X|\hat{X}) \leq H(P_e)+ P_e \log(|\mathcal{X}|-1)\] 其中 \(H(P_e)=H(P_e, 1 - P_e)\) 为二元熵函数，\(|\mathcal{X}|\) 为 \(X\) 和 \(\hat{X}\) 的取值数量。
-- **证明**:
+- **证明1**:
     定义随机变量 \(Z = \begin{cases}0, & 若 X = \hat{X} \\ 1, & 若 X \neq \hat{X} \end{cases}\) ，则 \(P_r(Z) = \begin{cases}1 - P_e, & 若 Z = 0 \\ P_e, & 若 Z = 1 \end{cases}\)，则\(H(Z)=H(P_e, 1 - P_e)=H(P_e)\)
     由于 \(Z\) 是 \(X\) 和 \(\hat{X}\) 的函数，有 \(H(Z|X\hat{X}) = 0\) ，则
     \[
@@ -964,6 +964,7 @@
     所以 \(I(X;Y) \geq I(X;\hat{X})\)，
     进而 \(H(X)-H(X|Y) \geq H(X)-H(X|\hat{X})\)，
     即 \(H(X|Y) \leq H(X|\hat{X})\)。 
+- **证明2**（不等式放缩）：见[译码错误与信道条件的关系](./Ch6sup_信道编码定理.md/#译码错误与信道条件的关系)，其中令 \(Y = \hat{X}\)，\(n = |\mathcal{X}|\)
 
 #### 费诺不等式（一般形式）
 - 对于任何满足 \(X \to Y \to \hat{X}\) 的估计量 \(\hat{X}\)，设 \(P_e = \Pr(X \neq \hat{X})\)，有：
